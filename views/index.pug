@@ -3,27 +3,30 @@ head
   script(src="https://code.jquery.com/jquery-3.3.1.min.js")
   script(src="/js/hqsack.js")
   link(rel="stylesheet", type="text/css", href="/css/hqsack.css")
-  link(href="https://fonts.googleapis.com/css?family=Open+Sans", rel="stylesheet")
 html
   body
-    .countdown.hidden
-      h1.title Welcome to HQSack
-      img(src="/images/cusack1.png")
-      p.label The next game starts in
-      .timer
-        span.days
-        | :
-        span.hours
-        | :
-        span.minutes
-        | :
-        span.seconds
-    .waiting.hidden
-      p.label.pulse Waiting for next question...
-    .question.hidden
-      p.question
-      iframe.question
-      .frames
-        iframe.answer-one
-        iframe.answer-two
-        iframe.answer-three
+    .container
+      a.github(href="https://github.com/acrimi/HQSack", target="_blank")
+        img(src="/images/github.png", width="30px", height="30px")
+      .countdown.hidden
+        h1.title HQSack
+        p.tag HQ Search Assist Client
+        img(src="/images/cusack1.png")
+        p.label The next game starts in
+        .timer
+          span.days
+          | :
+          span.hours
+          | :
+          span.minutes
+          | :
+          span.seconds
+      .waiting.hidden
+        p.label.pulse Waiting for next question...
+      .question.hidden
+        p.question
+        iframe.question
+        .frames
+          iframe.answer-one
+          iframe.answer-two
+          iframe.answer-three

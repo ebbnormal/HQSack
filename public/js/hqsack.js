@@ -13,6 +13,7 @@ function showCountdown() {
       updateTimer(nextShowTime);
     }, 1000);
   }
+  window.scrollTo(0, 0);
 }
 
 function showWaiting() {
@@ -21,6 +22,7 @@ function showWaiting() {
     $('.countdown, .question').addClass('hidden');
     $('.waiting').removeClass('hidden');
   }
+  window.scrollTo(0, 0);
 }
 
 function showQuestion() {
@@ -29,6 +31,7 @@ function showQuestion() {
     $('.countdown, .waiting').addClass('hidden');
     $('.question').removeClass('hidden');
   }
+  window.scrollTo(0, 0);
 }
 
 
@@ -77,7 +80,7 @@ const bingUrl = 'https://www.bing.com/search?q=';
 
 function updateQuestion(data) {
   showQuestion();
-  $('p.question').text('Question: ' + data.question);
+  $('p.question').text('Question ' + data.questionNumber + ': ' + data.question);
   $('iframe.question')
     .attr('src', bingUrl + encodeURIComponent(data.question));
   $('iframe.answer-one')
@@ -132,18 +135,21 @@ $(() => {
   checkShows();
 
   /* Test */
-  // updateQuestion({
-  //   question: 'Which of these divisions of geologic time is the shortest?',
-  //   answers: [
-  //     {
-  //       text: 'Era'
-  //     },
-  //     {
-  //       text: 'Epoch'
-  //     },
-  //     {
-  //       text: 'Age'
-  //     }
-  //   ]
-  // });
+  const testQuestion = {
+    question: 'Which of these divisions of geologic time is the shortest?',
+    questionNumber: 11,
+    answers: [
+      {
+        text: 'Era'
+      },
+      {
+        text: 'Epoch'
+      },
+      {
+        text: 'Age'
+      }
+    ]
+  };
+  // showWaiting();
+  // updateQuestion(testQuestion);
 });
