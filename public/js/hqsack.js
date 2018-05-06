@@ -130,18 +130,20 @@ function connectToSocket(socketUrl) {
 $(() => {
   showCountdown();
   checkShows();
-  updateQuestion({
-    question: 'Which of these divisions of geologic time is the shortest?',
-    answers: [
-      {
-        text: 'Era'
-      },
-      {
-        text: 'Epoch'
-      },
-      {
-        text: 'Age'
-      }
-    ]
-  });
+
+  /* Test */
+  // updateQuestion({
+  //   question: 'Which of these divisions of geologic time is the shortest?',
+  //   answers: [
+  //     {
+  //       text: 'Era'
+  //     },
+  //     {
+  //       text: 'Epoch'
+  //     },
+  //     {
+  //       text: 'Age'
+  //     }
+  //   ]
+  // });
 });
