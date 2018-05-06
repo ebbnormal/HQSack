@@ -1,6 +1,7 @@
 const server = require('http').createServer();
 const socket = require('./lib/socket');
 const stylus = require('stylus');
+const favicon = require('serve-favicon');
 const express = require('express');
 const app = express();
 
@@ -8,6 +9,7 @@ const port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 const ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
 app.set('view engine', 'pug');
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
