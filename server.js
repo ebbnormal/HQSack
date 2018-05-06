@@ -8,9 +8,8 @@ const port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 const ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
 app.set('view engine', 'pug');
-app.use(express.static('public'));
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 const compileStylus = (str, path) => {
   return stylus(str)
@@ -22,6 +21,8 @@ app.use(stylus.middleware({
   compile: compileStylus
 }));
 
+app.use(express.static('public'));
+
 app.get('/', (req, res) => {
   res.render('index');
 });
@@ -30,7 +31,7 @@ app.post('/wake', (req, res) => {
   const socketUrl = req.body.socketUrl;
   socket.listen(socketUrl);
   res.json({
-    proxy: socket.socketUrl
+    proxyUrl: socket.socketUrl
   });
 });
 
