@@ -1,0 +1,23 @@
+{
+  "name": "hqsack",
+  "version": "0.0.1",
+  "description": "HQ Search Assist Client",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acrimi/HQSack.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/acrimi/HQSack/issues"
+  },
+  "homepage": "https://github.com/acrimi/HQSack#readme",
+  "dependencies": {
+    "express": "4.16.3",
+    "pug": "2.0.3"
+  }
+}
