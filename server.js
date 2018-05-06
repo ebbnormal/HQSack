@@ -1,5 +1,6 @@
 const server = require('http').createServer();
 const socket = require('./lib/socket');
+const stylus = require('stylus');
 const express = require('express');
 const app = express();
 
@@ -10,6 +11,16 @@ app.set('view engine', 'pug');
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded());
+
+const compileStylus = (str, path) => {
+  return stylus(str)
+    .set('filename', path);
+};
+
+app.use(stylus.middleware({
+  src: __dirname + "/public/css",
+  compile: compileStylus
+}));
 
 app.get('/', (req, res) => {
   res.render('index');
