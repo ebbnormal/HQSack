@@ -126,25 +126,25 @@ function connectToSocket(socketUrl) {
 
 /* Init */
 $(() => {
-  showCountdown();
-  checkShows();
-
-  /* Test */
-  const testQuestion = {
-    question: 'Which of these divisions of geologic time is the shortest?',
-    questionNumber: 11,
-    answers: [
-      {
-        text: 'Era'
-      },
-      {
-        text: 'Epoch'
-      },
-      {
-        text: 'Age'
-      }
-    ]
-  };
-  // showWaiting();
-  // updateQuestion(testQuestion);
+  if (!window.displayTest) {
+    showCountdown();
+    checkShows();
+  } else {
+    const testQuestion = {
+      question: 'Which of these divisions of geologic time is the shortest?',
+      questionNumber: 11,
+      answers: [
+        {
+          text: 'Era'
+        },
+        {
+          text: 'Epoch'
+        },
+        {
+          text: 'Age'
+        }
+      ]
+    };
+    updateQuestion(testQuestion);
+  }
 });

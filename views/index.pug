@@ -1,17 +1,20 @@
 doctype html
 head
-  title HQSack
+  title HQsack
   script(src="https://code.jquery.com/jquery-3.3.1.min.js")
+  script(type="text/javascript")
+    | window.displayTest = #{displayTest || false};
   script(src="/js/hqsack.js")
   link(rel="stylesheet", type="text/css", href="/css/hqsack.css")
 html
   body
     .container
       a.github(href="https://github.com/acrimi/HQSack", target="_blank")
-        | HQSack &nbsp;
+        | HQsack &nbsp;
         img(src="/images/github.png", width="30px", height="30px")
       .countdown.hidden
-        h1.title HQSack
+        a.action.test(href="/test") View test question >
+        h1.title HQsack
         p.tag HQ Search Assist Client
         img(src="/images/cusack1.png")
         p.label The next game starts in
@@ -26,6 +29,8 @@ html
         img(src="/images/cusack2.png")
         p.label.pulse Waiting for next question...
       .question.hidden
+        if displayTest
+          a.action.back(href="/") < Back to home
         p.question
         iframe.question
         .frames

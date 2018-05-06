@@ -1,2 +1,2 @@
-# HQSack
+# HQsack
 HQ Search Assist Client
