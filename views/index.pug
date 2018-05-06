@@ -3,6 +3,17 @@ head
   script(src="https://code.jquery.com/jquery-3.3.1.min.js")
   script(src="/js/hqsack.js")
   link(rel="stylesheet", type="text/css", href="/css/hqsack.css")
+  link(href="https://fonts.googleapis.com/css?family=Open+Sans", rel="stylesheet")
 html
   body
-    h1 HQSack
+    h1.title Welcome to HQSack
+    img(src="/images/cusack1.png")
+    p.label The next game starts in
+    .timer
+      span.days
+      | :
+      span.hours
+      | :
+      span.minutes
+      | :
+      span.seconds
