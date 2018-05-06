@@ -6,14 +6,24 @@ head
   link(href="https://fonts.googleapis.com/css?family=Open+Sans", rel="stylesheet")
 html
   body
-    h1.title Welcome to HQSack
-    img(src="/images/cusack1.png")
-    p.label The next game starts in
-    .timer
-      span.days
-      | :
-      span.hours
-      | :
-      span.minutes
-      | :
-      span.seconds
+    .countdown.hidden
+      h1.title Welcome to HQSack
+      img(src="/images/cusack1.png")
+      p.label The next game starts in
+      .timer
+        span.days
+        | :
+        span.hours
+        | :
+        span.minutes
+        | :
+        span.seconds
+    .waiting.hidden
+      p.label.pulse Waiting for next question...
+    .question.hidden
+      p.question
+      iframe.question
+      .frames
+        iframe.answer-one
+        iframe.answer-two
+        iframe.answer-three

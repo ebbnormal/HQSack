@@ -1,3 +1,38 @@
+/* Display toggles */
+const DISPLAY_COUNTDOWN = 1;
+const DISPLAY_WAITING = 2;
+const DISPLAY_QUESTION = 3;
+let currentDisplay;
+
+function showCountdown() {
+  if (currentDisplay !== DISPLAY_COUNTDOWN) {
+    currentDisplay = DISPLAY_COUNTDOWN;
+    $('.waiting, .question').addClass('hidden');
+    $('.countdown').removeClass('hidden');
+    countdownInterval = setInterval(() => {
+      updateTimer(nextShowTime);
+    }, 1000);
+  }
+}
+
+function showWaiting() {
+  if (currentDisplay !== DISPLAY_WAITING) {
+    currentDisplay = DISPLAY_WAITING;
+    $('.countdown, .question').addClass('hidden');
+    $('.waiting').removeClass('hidden');
+  }
+}
+
+function showQuestion() {
+  if (currentDisplay !== DISPLAY_QUESTION) {
+    currentDisplay = DISPLAY_QUESTION;
+    $('.countdown, .waiting').addClass('hidden');
+    $('.question').removeClass('hidden');
+  }
+}
+
+
+/* Countdown logic */
 const SECONDS = 1000;
 const MINUTES = SECONDS * 60;
 const HOURS = MINUTES * 60;
@@ -11,12 +46,6 @@ const countdown = {
   minutes: { value: 0, next: 'hours' },
   seconds: { value: 0, next: 'minutes' }
 };
-
-function showCountdown() {
-  countdownInterval = setInterval(() => {
-    updateTimer(nextShowTime);
-  }, 1000)
-}
 
 function redrawTimer() {
   $('.days').text(pad(countdown.days.value));
@@ -43,10 +72,28 @@ function updateTimer(time) {
 }
 
 
+/* Question logic */
+const bingUrl = 'https://www.bing.com/search?q=';
 
+function updateQuestion(data) {
+  showQuestion();
+  $('p.question').text('Question: ' + data.question);
+  $('iframe.question')
+    .attr('src', bingUrl + encodeURIComponent(data.question));
+  $('iframe.answer-one')
+    .attr('src', bingUrl + encodeURIComponent(data.answers[0].text));
+  $('iframe.answer-two')
+    .attr('src', bingUrl + encodeURIComponent(data.answers[1].text));
+  $('iframe.answer-three')
+    .attr('src', bingUrl + encodeURIComponent(data.answers[2].text));
+}
+
+
+/* Networking logic */
 function checkShows() {
   $.get('https://api-quiz.hype.space/shows/now', (res) => {
     if (res.active) {
+      showWaiting();
       wakeServer(res.broadcast.socketUrl);
     } else {
       updateTimer(res.nextShowTime);
@@ -69,7 +116,7 @@ function connectToSocket(socketUrl) {
   const ws = new WebSocket(socketUrl);
   ws.addEventListener('message', res => {
     const data = JSON.parse(res.data);
-    console.log(data);
+    updateQuestion(data);
   });
 
   ws.addEventListener('close', () => {
@@ -79,5 +126,22 @@ function connectToSocket(socketUrl) {
 }
 
 
-showCountdown();
-checkShows();
+/* Init */
+$(() => {
+  showCountdown();
+  checkShows();
+  updateQuestion({
+    question: 'Which of these divisions of geologic time is the shortest?',
+    answers: [
+      {
+        text: 'Era'
+      },
+      {
+        text: 'Epoch'
+      },
+      {
+        text: 'Age'
+      }
+    ]
+  });
+});
