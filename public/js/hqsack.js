@@ -39,19 +39,16 @@ function showQuestion() {
 const SECONDS = 1000;
 const MINUTES = SECONDS * 60;
 const HOURS = MINUTES * 60;
-const DAYS = HOURS * 24;
 
 let nextShowTime;
 let countdownInterval;
 const countdown = {
-  days: { value: 0 },
-  hours: { value: 0, next: 'days' },
-  minutes: { value: 0, next: 'hours' },
-  seconds: { value: 0, next: 'minutes' }
+  hours: { value: 0 },
+  minutes: { value: 0 },
+  seconds: { value: 0 }
 };
 
 function redrawTimer() {
-  $('.days').text(pad(countdown.days.value));
   $('.hours').text(pad(countdown.hours.value));
   $('.minutes').text(pad(countdown.minutes.value));
   $('.seconds').text(pad(countdown.seconds.value));
@@ -64,8 +61,6 @@ function pad(num) {
 function updateTimer(time) {
   nextShowTime = time;
   let diff = new Date(time).getTime() - Date.now();
-  countdown.days.value = Math.floor(diff / DAYS);
-  diff -= countdown.days.value * DAYS;
   countdown.hours.value = Math.floor(diff / HOURS);
   diff -= countdown.hours.value * HOURS;
   countdown.minutes.value = Math.floor(diff / MINUTES);
