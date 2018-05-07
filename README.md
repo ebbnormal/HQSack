@@ -1,13 +1,20 @@
 # HQsack
 Source code for http://bit.ly/hqsack, a website that auto-searches HQ Trivia questions in realtime during the game.
 
-## How To Use The Site
+## How to use the site
 To use the website, simply open the page as the game is starting. As questions are asked, the site will auto-populate 4 search views with the question and 3 answers (subject to change as search criteria is tweaked for better relevance). That's it!
 
 When there isn't a game currently going, the site provides a countdown until the next show.
 
+## How to run the server
+The site is built as a simple Express app using Node 8. Just clone, run `npm install`, and `npm start`.
+
+For the HQ socket authentication, you will need to get an access token for an HQ account (sniff the network traffic of the app). It is recommended to not use your actual account, since I believe the account used by HQsack will lose any game on the first question (since the server is passive and doesn't answer the question).
+
+Once you have a token, you can set it as the `HQ_TOKEN` environment variable. Additionally, the project uses [node-config](https://github.com/lorenwest/node-config), so you can also add it in a `/config/local.json` file as described by their documentation.
+
 ## How it works
-The site is built using Express. There are two primary logical components: a WebSocket class on the server, and the client side javascript of the site.
+There are two primary logical components: a WebSocket class on the server, and the client side javascript of the site.
 
 The socket class creates a WebSocket client to the HQ server when a game starts. I then starts a WebSocket server and relays messages received on the client from HQ through to any clients connected to the HQsack socket server. It's basically just a proxy from the HQ socket server to the socket clients run on the HQsack site.
 
