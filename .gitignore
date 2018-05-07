@@ -59,3 +59,6 @@ typings/
 
 # Generated CSS files
 *.css
+
+# User config
+/config/local*.json

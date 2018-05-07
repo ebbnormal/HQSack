@@ -1,4 +1,0 @@
-{
-  "hqToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4MzE1NTE0LCJ1c2VybmFtZSI6Imdvb3ZvaSIsImF2YXRhclVybCI6InMzOi8vaHlwZXNwYWNlLXF1aXovZGVmYXVsdF9hdmF0YXJzL1VudGl0bGVkLTFfMDAwM19yZWQucG5nIiwidG9rZW4iOiJHQ2Z4WFMiLCJyb2xlcyI6W10sImNsaWVudCI6IiIsImd1ZXN0SWQiOm51bGwsInYiOjEsImlhdCI6MTUyNTU5Mjk4NywiZXhwIjoxNTMzMzY4OTg3LCJpc3MiOiJoeXBlcXVpei8xIn0.J6xQcHe-s5o2aW3Jw2zp2zVd_iuW-ToIVht8GW6RlQ8",
-  "socketUrl": "ws://hqsack-hqsack.193b.starter-ca-central-1.openshiftapps.com/"
-}
