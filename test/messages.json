@@ -1,0 +1,73 @@
+[
+  {
+    "type": "question",
+    "question": "question 1",
+    "questionNumber": 1,
+    "answers": [
+      {
+        "text": "answer1"
+      },
+      {
+        "text": "answer2"
+      },
+      {
+        "text": "answer3"
+      }
+    ]
+  },
+  {
+    "type": "question",
+    "question": "question 2",
+    "questionNumber": 2,
+    "answers": [
+      {
+        "text": "answer1"
+      },
+      {
+        "text": "answer2"
+      },
+      {
+        "text": "answer3"
+      }
+    ]
+  },
+  {
+    "type": "broadcastEnded",
+    "reason": "Please join again."
+  },
+  {
+    "type": "question",
+    "question": "question 3",
+    "questionNumber": 3,
+    "answers": [
+      {
+        "text": "answer1"
+      },
+      {
+        "text": "answer2"
+      },
+      {
+        "text": "answer3"
+      }
+    ]
+  },
+  {
+    "type": "question",
+    "question": "question 4",
+    "questionNumber": 4,
+    "answers": [
+      {
+        "text": "answer1"
+      },
+      {
+        "text": "answer2"
+      },
+      {
+        "text": "answer3"
+      }
+    ]
+  },
+  {
+    "type": "broadcastEnded"
+  }
+]
