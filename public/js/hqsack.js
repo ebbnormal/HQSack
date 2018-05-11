@@ -34,6 +34,27 @@ function showQuestion() {
   window.scrollTo(0, 0);
 }
 
+function showTestQuestion() {
+  const testQuestion = {
+    question: 'Which of these divisions of geologic time is the shortest?',
+    questionNumber: 11,
+    answers: [
+      {
+        text: 'Era'
+      },
+      {
+        text: 'Epoch'
+      },
+      {
+        text: 'Age'
+      }
+    ],
+    totalTimeMs: 10000,
+    askTime: new Date().toISOString()
+  };
+  updateQuestion(testQuestion);
+}
+
 
 /* Countdown logic */
 const SECONDS = 1000;
@@ -72,10 +93,18 @@ function updateTimer(time) {
 
 /* Question logic */
 const bingUrl = 'https://www.bing.com/search?q=';
+let questionTimer = 10;
+let askTime;
+let totalTime;
+let interval;
 
 function updateQuestion(data) {
   showQuestion();
+  startQuestionTimer(data);
   $('p.question').text('Question ' + data.questionNumber + ': ' + data.question);
+  $('.answer.one').text('1) ' + data.answers[0].text);
+  $('.answer.two').text('2) ' + data.answers[1].text);
+  $('.answer.three').text('3) ' + data.answers[2].text);
   $('iframe.question')
     .attr('src', bingUrl + encodeURIComponent(data.question));
   $('iframe.answer-one')
@@ -84,6 +113,37 @@ function updateQuestion(data) {
     .attr('src', bingUrl + encodeURIComponent(data.answers[1].text));
   $('iframe.answer-three')
     .attr('src', bingUrl + encodeURIComponent(data.answers[2].text));
+}
+
+function startQuestionTimer(question) {
+  if (interval) {
+    clearInterval(interval);
+    interval = null;
+  }
+
+  $('.question-timer').css('color', '');
+  askTime = new Date(question.askTime).getTime();
+  totalTime = question.totalTimeMs;
+  updateTimer();
+
+  interval = setInterval(() => {
+    updateTimer();
+    if (questionTimer === 0) {
+      clearInterval(interval);
+      interval = null;
+    }
+  }, 1000);
+}
+
+function updateTimer() {
+  let elapsed = Date.now() - askTime;
+  questionTimer = Math.ceil((totalTime - elapsed) / 1000);
+  
+  if (questionTimer < 4) {
+    $('.question-timer').css('color', 'red');
+  }
+
+  $('.question-timer').text(questionTimer);
 }
 
 
@@ -130,21 +190,6 @@ $(() => {
     showCountdown();
     checkShows();
   } else {
-    const testQuestion = {
-      question: 'Which of these divisions of geologic time is the shortest?',
-      questionNumber: 11,
-      answers: [
-        {
-          text: 'Era'
-        },
-        {
-          text: 'Epoch'
-        },
-        {
-          text: 'Age'
-        }
-      ]
-    };
-    updateQuestion(testQuestion);
+    showTestQuestion();
   }
 });

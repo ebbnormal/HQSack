@@ -31,7 +31,14 @@ html
       .question.hidden
         if displayTest
           a.action.back(href="/") < Back to home
-        p.question
+        .info
+          p.question
+          span.answer.one
+          | &nbsp;&nbsp;&nbsp;
+          span.answer.two
+          | &nbsp;&nbsp;&nbsp;
+          span.answer.three
+        .question-timer
         iframe.question
         .frames
           iframe.answer-one
