@@ -10,7 +10,7 @@ function showCountdown() {
     $('.waiting, .question').addClass('hidden');
     $('.countdown').removeClass('hidden');
     countdownInterval = setInterval(() => {
-      updateTimer(nextShowTime);
+      updateCountdown(nextShowTime);
     }, 1000);
   }
   window.scrollTo(0, 0);
@@ -69,7 +69,7 @@ const countdown = {
   seconds: { value: 0 }
 };
 
-function redrawTimer() {
+function redrawCountdown() {
   $('.hours').text(pad(countdown.hours.value));
   $('.minutes').text(pad(countdown.minutes.value));
   $('.seconds').text(pad(countdown.seconds.value));
@@ -79,7 +79,7 @@ function pad(num) {
   return ('00' + num).substr(-2);
 }
 
-function updateTimer(time) {
+function updateCountdown(time) {
   nextShowTime = time;
   let diff = new Date(time).getTime() - Date.now();
   countdown.hours.value = Math.floor(diff / HOURS);
@@ -87,7 +87,7 @@ function updateTimer(time) {
   countdown.minutes.value = Math.floor(diff / MINUTES);
   diff -= countdown.minutes.value * MINUTES;
   countdown.seconds.value = Math.floor(diff / SECONDS);
-  redrawTimer();
+  redrawCountdown();
 }
 
 
@@ -124,10 +124,10 @@ function startQuestionTimer(question) {
   $('.question-timer').css('color', '');
   askTime = new Date(question.askTime).getTime();
   totalTime = question.totalTimeMs;
-  updateTimer();
+  updateQuestionTimer();
 
   interval = setInterval(() => {
-    updateTimer();
+    updateQuestionTimer();
     if (questionTimer === 0) {
       clearInterval(interval);
       interval = null;
@@ -135,7 +135,7 @@ function startQuestionTimer(question) {
   }, 1000);
 }
 
-function updateTimer() {
+function updateQuestionTimer() {
   let elapsed = Date.now() - askTime;
   questionTimer = Math.ceil((totalTime - elapsed) / 1000);
   
@@ -154,7 +154,7 @@ function checkShows() {
       showWaiting();
       wakeServer(res.broadcast.socketUrl);
     } else {
-      updateTimer(res.nextShowTime);
+      updateCountdown(res.nextShowTime);
       setTimeout(checkShows, 60000);
     }
   });
