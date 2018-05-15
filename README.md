@@ -11,7 +11,7 @@ The site is built as a simple Express app using Node 8. Just clone, run `npm ins
 
 For the HQ socket authentication, you will need to get an access token for an HQ account (sniff the network traffic of the app). It is recommended to not use your actual account, since I believe the account used by HQsack will lose any game on the first question (since the server is passive and doesn't answer the question).
 
-Once you have a token, you can set it as the `HQ_TOKEN` environment variable. Additionally, the project uses [node-config](https://github.com/lorenwest/node-config), so you can also add it in a `/config/local.json` file as described by their documentation.
+Once you have a token, you can set it as the `HQ_TOKEN` environment variable. Alternatively, the project uses [node-config](https://github.com/lorenwest/node-config), so you can also add it in a `/config/local.json` file as described by their documentation.
 
 ## How it works
 There are two primary logical components: a WebSocket class on the server, and the client side javascript of the site.
