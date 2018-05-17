@@ -50,7 +50,8 @@ function showTestQuestion() {
       }
     ],
     totalTimeMs: 10000,
-    askTime: new Date().toISOString()
+    askTime: new Date().toISOString(),
+    received: new Date().toISOString()
   };
   updateQuestion(testQuestion);
 }
@@ -122,7 +123,7 @@ function startQuestionTimer(question) {
   }
 
   $('.question-timer').css('color', '');
-  askTime = new Date(question.askTime).getTime();
+  askTime = new Date(question.received).getTime();
   totalTime = question.totalTimeMs;
   updateQuestionTimer();
 
