@@ -65,13 +65,14 @@ const HOURS = MINUTES * 60;
 let nextShowTime;
 let countdownInterval;
 const countdown = {
+  negative: false,
   hours: { value: 0 },
   minutes: { value: 0 },
   seconds: { value: 0 }
 };
 
 function redrawCountdown() {
-  $('.hours').text(pad(countdown.hours.value));
+  $('.hours').text((countdown.negative ? '-' : '') + pad(countdown.hours.value));
   $('.minutes').text(pad(countdown.minutes.value));
   $('.seconds').text(pad(countdown.seconds.value));
 }
@@ -83,6 +84,8 @@ function pad(num) {
 function updateCountdown(time) {
   nextShowTime = time;
   let diff = new Date(time).getTime() - Date.now();
+  countdown.negative = diff < 0;
+  diff = Math.abs(diff);
   countdown.hours.value = Math.floor(diff / HOURS);
   diff -= countdown.hours.value * HOURS;
   countdown.minutes.value = Math.floor(diff / MINUTES);
@@ -138,7 +141,7 @@ function startQuestionTimer(question) {
 
 function updateQuestionTimer() {
   let elapsed = Date.now() - askTime;
-  questionTimer = Math.ceil((totalTime - elapsed) / 1000);
+  questionTimer = Math.max(0, Math.ceil((totalTime - elapsed) / 1000));
   
   if (questionTimer < 4) {
     $('.question-timer').css('color', 'red');
