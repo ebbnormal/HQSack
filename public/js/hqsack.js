@@ -97,19 +97,43 @@ function updateCountdown(time) {
 
 /* Question logic */
 const bingUrl = 'https://www.bing.com/search?q=';
+const answerModifiers = [];
+let lastQuestion;
 let questionTimer = 10;
 let askTime;
 let totalTime;
 let interval;
 
+function attachQuestionListeners() {
+  $('.question-text').on('click', '.question-word', e => {
+    const word = e.target.innerText.replace(/[?.!]$/g, '');
+    selectAnswerSearchModifier(word, e.ctrlKey || e.shiftKey);
+  });
+
+  $('.clear-modifiers').click(() => {
+    selectAnswerSearchModifier(null);
+  });
+}
+
 function updateQuestion(data) {
+  lastQuestion = data;
   showQuestion();
   startQuestionTimer(data);
-  $('p.question').text('Question ' + data.questionNumber + ': ' + data.question);
-  $('.answer.one').text('1) ' + data.answers[0].text);
-  $('.answer.two').text('2) ' + data.answers[1].text);
-  $('.answer.three').text('3) ' + data.answers[2].text);
-  $('iframe.question')
+
+  answerModifiers.slice(0, answerModifiers.length);
+  $('.clear-modifiers').addClass('hidden');
+
+  $('.question-number').text(`Question ${data.questionNumber}:`);
+  let questionHtml = '';
+  for (let word of data.question.split(' ')) {
+    questionHtml += ` <span class="question-word">${word}</span>`;
+  }
+  $('.question-text').html(questionHtml);
+
+  $('.answer.one').text(data.answers[0].text);
+  $('.answer.two').text(data.answers[1].text);
+  $('.answer.three').text(data.answers[2].text);
+  $('iframe.question-search')
     .attr('src', bingUrl + encodeURIComponent(data.question));
   $('iframe.answer-one')
     .attr('src', bingUrl + encodeURIComponent(data.answers[0].text));
@@ -117,6 +141,26 @@ function updateQuestion(data) {
     .attr('src', bingUrl + encodeURIComponent(data.answers[1].text));
   $('iframe.answer-three')
     .attr('src', bingUrl + encodeURIComponent(data.answers[2].text));
+}
+
+function selectAnswerSearchModifier(word, append) {
+  if (!append) {
+    answerModifiers.splice(0, answerModifiers.length);
+  }
+  if (word) {
+    $('.clear-modifiers').removeClass('hidden');
+    answerModifiers.push(word);
+  } else {
+    $('.clear-modifiers').addClass('hidden');
+  }
+  modifierString = ' ' + answerModifiers.join(' ');
+
+  $('iframe.answer-one')
+    .attr('src', bingUrl + encodeURIComponent(lastQuestion.answers[0].text + modifierString));
+  $('iframe.answer-two')
+    .attr('src', bingUrl + encodeURIComponent(lastQuestion.answers[1].text + modifierString));
+  $('iframe.answer-three')
+    .attr('src', bingUrl + encodeURIComponent(lastQuestion.answers[2].text + modifierString));
 }
 
 function startQuestionTimer(question) {
@@ -142,7 +186,7 @@ function startQuestionTimer(question) {
 function updateQuestionTimer() {
   let elapsed = Date.now() - askTime;
   questionTimer = Math.max(0, Math.ceil((totalTime - elapsed) / 1000));
-  
+
   if (questionTimer < 4) {
     $('.question-timer').css('color', 'red');
   }
@@ -190,6 +234,7 @@ function connectToSocket(socketUrl) {
 
 /* Init */
 $(() => {
+  attachQuestionListeners();
   if (!window.displayTest) {
     showCountdown();
     checkShows();

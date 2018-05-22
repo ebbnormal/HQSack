@@ -18,7 +18,7 @@ html
         p.tag HQ Search Assist Client
         img(src="/images/cusack1.png")
         p.label The next game starts in
-        .timer
+        .clock
           span.hours
           | :
           span.minutes
@@ -32,14 +32,21 @@ html
         if displayTest
           a.action.back(href="/") < Back to home
         .info
-          p.question
+          p.question-line
+            span.question-number.decoration
+            span.question-text(title="Click to append word to answer search. Ctrl/Shift+click to append multiple.")
+            | &nbsp;
+            a.action.clear-modifiers.hidden Clear
+          span.decoration 1)&nbsp;
           span.answer.one
           | &nbsp;&nbsp;&nbsp;
+          span.decoration 2)&nbsp;
           span.answer.two
           | &nbsp;&nbsp;&nbsp;
+          span.decoration 3)&nbsp;
           span.answer.three
         .question-timer
-        iframe.question
+        iframe.question-search
         .frames
           iframe.answer-one
           iframe.answer-two
