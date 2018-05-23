@@ -120,7 +120,7 @@ function updateQuestion(data) {
   showQuestion();
   startQuestionTimer(data);
 
-  answerModifiers.slice(0, answerModifiers.length);
+  answerModifiers.splice(0, answerModifiers.length);
   $('.clear-modifiers').addClass('hidden');
 
   $('.question-number').text(`Question ${data.questionNumber}:`);
