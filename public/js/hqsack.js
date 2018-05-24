@@ -105,9 +105,16 @@ let totalTime;
 let interval;
 
 function attachQuestionListeners() {
+
   $('.question-text').on('click', '.question-word', e => {
-    const word = e.target.innerText.replace(/[?.!]$/g, '');
-    selectAnswerSearchModifier(word, e.ctrlKey || e.shiftKey);
+    const word = e.target.innerText.replace(/(?:^[?.!",'])|(?:[?.!",]$)/g, '');
+    selectAnswerSearchModifier(word, e.shiftKey);
+  });
+
+  $('.question-text').on('contextmenu', '.question-word', e => {
+    const word = e.target.innerText.replace(/(?:^[?.!",'])|(?:[?.!",]$)/g, '');
+    selectAnswerSearchModifier(word, true);
+    return false;
   });
 
   $('.clear-modifiers').click(() => {
