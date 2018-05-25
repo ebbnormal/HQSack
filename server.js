@@ -48,7 +48,7 @@ app.get('/search', (req, res) => {
     { answer: req.query.hqsackA2.toLowerCase(), color: 'lime' },
     { answer: req.query.hqsackA3.toLowerCase(), color: 'aqua' }
   ];
-  request.get(`https://www.bing.com/search?q=${req.query.q}`)
+  request.get(`https://www.bing.com/search?q=${encodeURIComponent(req.query.q)}`)
     .then(html => {
       for (let highlight of highlights) {
         const regex = new RegExp(`(>[^<]*\\b)(${highlight.answer}s?)(\\b)`, 'gi');
