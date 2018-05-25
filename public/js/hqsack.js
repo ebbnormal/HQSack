@@ -36,17 +36,17 @@ function showQuestion() {
 
 function showTestQuestion() {
   const testQuestion = {
-    question: 'Which of these divisions of geologic time is the shortest?',
+    question: 'In which of these shows did main characters work for the chain restaurant Los Pollos Hermanos?',
     questionNumber: 11,
     answers: [
       {
-        text: 'Era'
+        text: 'Scandal'
       },
       {
-        text: 'Epoch'
+        text: 'Breaking Bad'
       },
       {
-        text: 'Age'
+        text: 'The Big Bang Theory'
       }
     ],
     totalTimeMs: 10000,
