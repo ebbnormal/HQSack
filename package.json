@@ -20,6 +20,7 @@
     "config": "1.30.0",
     "express": "4.16.3",
     "pug": "2.0.3",
+    "request": "2.87.0",
     "request-promise": "4.2.2",
     "serve-favicon": "2.5.0",
     "stylus": "0.54.5",
