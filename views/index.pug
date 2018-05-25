@@ -12,7 +12,10 @@ html
       a.github(href="https://github.com/acrimi/HQSack", target="_blank")
         | HQsack &nbsp;
         img(src="/images/github.png", width="30px", height="30px")
-      .countdown.hidden
+      .options-wrapper
+        input#highlight-box(type="checkbox")
+        label(for="highlight-box") Enable search highlighting (Experimental)
+      .page.countdown.hidden
         a.action.test(href="/test") View example question >
         h1.title HQsack
         p.tag HQ Search Assist Client
@@ -24,11 +27,11 @@ html
           span.minutes
           | :
           span.seconds
-      .waiting.hidden
+      .page.waiting.hidden
         h1.title The game has begun!
         img(src="/images/cusack2.png")
         p.label.pulse Waiting for next question...
-      .question.hidden
+      .page.question.hidden
         if displayTest
           a.action.back(href="/") < Back to home
         .info
@@ -37,13 +40,13 @@ html
             span.question-text(title="Click to append word to answer search. Shift+click or right click to append multiple.")
             | &nbsp;
             a.action.clear-modifiers.hidden Clear
-          span.decoration 1)&nbsp;
+          span.decoration.one 1)&nbsp;
           span.answer.one
           | &nbsp;&nbsp;&nbsp;
-          span.decoration 2)&nbsp;
+          span.decoration.two 2)&nbsp;
           span.answer.two
           | &nbsp;&nbsp;&nbsp;
-          span.decoration 3)&nbsp;
+          span.decoration.three 3)&nbsp;
           span.answer.three
         .question-timer
         iframe.question-search

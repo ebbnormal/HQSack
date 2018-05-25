@@ -34,6 +34,14 @@ body
   font-size: 14px
   color: inherit
 
+.options-wrapper
+  position: absolute
+  left: 10px
+  top: 40px
+  font-size: 14px
+  input, label
+    cursor: pointer
+
 .action.test, .action.back
   position: absolute
   left: 10px
@@ -96,6 +104,13 @@ body
     iframe
       flex-grow: 1
       height: 900px
+  &.highlighted
+    .decoration.one
+      background: yellow
+    .decoration.two
+      background: lime
+    .decoration.three
+      background: aqua
 
 
 .pulse

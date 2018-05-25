@@ -97,6 +97,8 @@ function updateCountdown(time) {
 
 /* Question logic */
 const bingUrl = 'https://www.bing.com/search?q=';
+const proxySearchUrl = '/search?q=';
+let questionSearchUrl = bingUrl;
 const answerModifiers = [];
 let lastQuestion;
 let questionTimer = 10;
@@ -105,7 +107,6 @@ let totalTime;
 let interval;
 
 function attachQuestionListeners() {
-
   $('.question-text').on('click', '.question-word', e => {
     const word = e.target.innerText.replace(/(?:^[?.!",'])|(?:[?.!",]$)/g, '');
     selectAnswerSearchModifier(word, e.shiftKey);
@@ -119,6 +120,20 @@ function attachQuestionListeners() {
 
   $('.clear-modifiers').click(() => {
     selectAnswerSearchModifier(null);
+  });
+
+  $('#highlight-box').change(() => {
+    if ($('#highlight-box')[0].checked) {
+      questionSearchUrl = proxySearchUrl;
+      $('.page.question').addClass('highlighted');
+    } else {
+      questionSearchUrl = bingUrl;
+      $('.highlighted').removeClass('highlighted');
+    }
+
+    if (currentDisplay === DISPLAY_QUESTION) {
+      loadQuestionSearch(lastQuestion);
+    }
   });
 }
 
@@ -140,8 +155,21 @@ function updateQuestion(data) {
   $('.answer.one').text(data.answers[0].text);
   $('.answer.two').text(data.answers[1].text);
   $('.answer.three').text(data.answers[2].text);
-  $('iframe.question-search')
-    .attr('src', bingUrl + encodeURIComponent(data.question));
+
+  loadQuestionSearch(data);
+  loadAnswerSearches(data);
+}
+
+function loadQuestionSearch(data) {
+  const answersQuery = `&hqsackA1=${encodeURIComponent(data.answers[0].text)}` +
+    `&hqsackA2=${encodeURIComponent(data.answers[1].text)}` +
+    `&hqsackA3=${encodeURIComponent(data.answers[2].text)}`;
+
+  $('iframe.question-search').attr('src', questionSearchUrl +
+    encodeURIComponent(data.question) + answersQuery);
+}
+
+function loadAnswerSearches(data) {
   $('iframe.answer-one')
     .attr('src', bingUrl + encodeURIComponent(data.answers[0].text));
   $('iframe.answer-two')
