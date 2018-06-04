@@ -44,21 +44,32 @@ app.post('/wake', (req, res) => {
 
 app.get('/search', (req, res) => {
   const highlights = [
-    { answer: req.query.hqsackA1.toLowerCase(), color: 'yellow' },
-    { answer: req.query.hqsackA2.toLowerCase(), color: 'lime' },
-    { answer: req.query.hqsackA3.toLowerCase(), color: 'aqua' }
+    { answer: req.query.hqsackA1.toLowerCase(), color: 'yellow', count: 0 },
+    { answer: req.query.hqsackA2.toLowerCase(), color: 'lime', count: 0 },
+    { answer: req.query.hqsackA3.toLowerCase(), color: 'aqua', count: 0 }
   ];
   request.get({
     url: 'https://www.bing.com/search',
     qs: { q: req.query.q }
   }).then(html => {
-      for (let highlight of highlights) {
-        const regex = new RegExp(`(>[^<]*\\b)(${highlight.answer}s?)(\\b)`, 'gi');
-        html = html.replace(regex, `$1<span style="background-color:${highlight.color};">$2</span>$3`);
-      }
-      
-      res.send(html);
-    });
+    let countHtml = '<div style="display:inline-block;position:fixed;top:10px;right:50px;">';
+    for (let highlight of highlights) {
+      const regex = new RegExp(`(>[^<]*\\b)(${highlight.answer}s?)(\\b)`, 'gi');
+      // html = html.replace(regex, `$1<span style="background-color:${highlight.color};">$2</span>$3`);
+      html = html.replace(regex, (match, preText, answer, postText) => {
+        highlight.count++;
+        return `${preText}<span style="background-color:${highlight.color};">${answer}</span>${postText}`;
+      });
+
+      countHtml += `<span style="display:inline-block;background-color:${highlight.color};` +
+        `width:50px;height:50px;font-size:30px;text-align:center;line-height:50px;">${highlight.count}</span>`
+    }
+
+    countHtml += '</div>';
+    html = html.replace(/<\/body>/, `${countHtml}$&`);
+    
+    res.send(html);
+  });
 });
 
 server.on('request', app);
