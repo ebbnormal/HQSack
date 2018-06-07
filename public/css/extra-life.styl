@@ -1,0 +1,44 @@
+@import './common'
+
+.form-background
+  position: relative
+  top: -77px
+  z-index: -1
+  img
+    opacity: .8
+
+.form
+  margin-top: 50px
+  .message
+    font-size: 22px
+    margin-bottom: 30px
+  .error
+    color: #C00000
+    margin-bottom: 5px
+  .field
+    height: 30px
+    font-size: 20px
+    vertical-align: middle
+  .submit
+    cursor: pointer
+    background: #386bc8;
+    border: none;
+    height: 36px;
+    vertical-align: middle;
+    color: white;
+    font-size: 18px;
+    &:active
+      background: #265aba
+    &:disabled
+      cursor: default
+      background: #afb5bf
+  .checkbox-container
+    margin-top: 10px
+    font-size: 18px
+
+.form.enter-phone
+  margin-bottom: 30px
+
+.page
+  .message
+    font-size: 30px

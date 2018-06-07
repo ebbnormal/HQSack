@@ -34,6 +34,10 @@ app.get('/test', (req, res) => {
   res.render('index', { displayTest: true });
 });
 
+app.get('/extra-life', (req, res) => {
+  res.render('extra-life');
+});
+
 app.post('/wake', (req, res) => {
   const socketUrl = req.body.socketUrl;
   socket.listen(socketUrl);

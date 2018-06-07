@@ -1,0 +1,34 @@
+doctype html
+head
+  title HQsack | Extra Life
+  script(src="https://code.jquery.com/jquery-3.3.1.min.js")
+  script(src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js")
+  script(src="/js/extra-life.js")
+  link(rel="stylesheet", type="text/css", href="/css/extra-life.css")
+html
+  body
+    .container
+      a.action.back(href="/") < Back to home
+      a.github(href="https://github.com/acrimi/HQSack", target="_blank")
+        | HQsack &nbsp;
+        img(src="/images/github.png", width="30px", height="30px")
+      form.form.enter-phone.hidden
+        p.message Enter the phone number for your account
+        p.error.ghost Invalid phone number
+        input.field.phone(type="tel", placeholder="555-555-5555")
+        button.submit Submit
+      form.form.enter-code.hidden
+        p.message Check your text messages for a confirmation code
+        p.error.ghost Invalid code
+        input.field.code(type="text", inputmode="numeric", maxlength="4", placeholder="1111")
+        button.submit Submit
+        .checkbox-container
+          input.remember(type="checkbox", name="remember")
+          label(for="remember") Remember me
+      .page.extra-life.hidden
+        p.message.waiting Attempting to get free extra life...
+        p.message.success.hidden Extra life received!
+        p.message.error.hidden Failed to get extra life. You can only get a free life every 7 days.
+        span.action.clear-token Clear token
+    .form-background.hidden
+      img.anything(src="/images/anything.png", width="340")

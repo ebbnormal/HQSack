@@ -1,38 +1,17 @@
-@font-face
-  font-family: 'Bebas Neue Light'
-  src: url('../fonts/BebasNeue_Light.otf') format('otf')
+@import './common'
 
-html
-  min-height: 100%
-  background: linear-gradient(#f1f5fc, #d9e5ff)
-
-body
-  text-align: center
-  font-family: 'Bebas Neue Light', sans-serif
-  color: #555
-
-.container
-  position: relative
-  overflow: auto
-
-.hidden
-  display: none !important
-
-.action
-  cursor: pointer
-  text-decoration: underline
-  color: inherit
-
-.github
+.extra-life
   position: absolute
-  display: flex
-  align-items: center
   top: 10px
-  right: 10px
-  text-decoration: none
-  font-weight: 600
-  font-size: 14px
-  color: inherit
+  right: 110px
+  text-align: center
+  .life-count
+    position: absolute
+    left: 0
+    right: 0
+    line-height: 32px
+    font-size: 16px
+    color: white
 
 .options-wrapper
   position: absolute
@@ -42,7 +21,7 @@ body
   input, label
     cursor: pointer
 
-.action.test, .action.back
+.action.test
   position: absolute
   left: 10px
   top: 10px
@@ -65,7 +44,7 @@ body
 .question-timer
   position: absolute
   top: 10px
-  right: 150px
+  right: 160px
   font-size: 30px
   font-weight: 600
 
