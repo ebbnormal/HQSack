@@ -27,8 +27,12 @@ html
           label(for="remember") Remember me
       .page.extra-life.hidden
         p.message.waiting Attempting to get free extra life...
-        p.message.success.hidden Extra life received!
-        p.message.error.hidden Failed to get extra life. You can only get a free life every 7 days.
+        .status.success.hidden
+          p.message Extra life received!
+          img(src="/images/thumbs_up.png" width="350")
+        .status.error.hidden
+          p.message Failed to get extra life. You can only get a free life every 7 days.
+          img(src="/images/sadboi.png", width="350")
         span.action.clear-token Clear token
     .form-background.hidden
       img.anything(src="/images/anything.png", width="340")

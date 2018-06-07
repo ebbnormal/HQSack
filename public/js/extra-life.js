@@ -51,8 +51,8 @@ function showExtraLifeMessage() {
   $('.page.extra-life').removeClass('hidden');
   
   $('.page.extra-life .message.waiting').removeClass('hidden');
-  $('.page.extra-life .message.success').addClass('hidden');
-  $('.page.extra-life .message.error').addClass('hidden');
+  $('.page.extra-life .status.success').addClass('hidden');
+  $('.page.extra-life .status.error').addClass('hidden');
 }
 
 
@@ -116,16 +116,16 @@ function getExtraLife(accessToken) {
     
     setTimeout(() => {
       $('.page.extra-life .message.waiting').addClass('hidden');
-      $('.page.extra-life .message.success').removeClass('hidden');
-      $('.page.extra-life .message.error').addClass('hidden');
+      $('.page.extra-life .status.success').removeClass('hidden');
+      $('.page.extra-life .status.error').addClass('hidden');
     }, diff);
   }).catch(err => {
     const diff = minTime - (Date.now() - start);
 
     setTimeout(() => {
       $('.page.extra-life .message.waiting').addClass('hidden');
-      $('.page.extra-life .message.success').addClass('hidden');
-      $('.page.extra-life .message.error').removeClass('hidden');
+      $('.page.extra-life .status.success').addClass('hidden');
+      $('.page.extra-life .status.error').removeClass('hidden');
     }, diff);
   });
 }
