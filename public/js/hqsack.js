@@ -268,10 +268,30 @@ function connectToSocket(socketUrl) {
   });
 }
 
+function checkExtraLives() {
+  const token = Cookies.get('hqAccessToken');
+  if (!token) {
+    return;
+  }
+
+  $.get({
+    url: 'https://api-quiz.hype.space/users/me',
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  }).then(res => {
+    const count = +(res.lives);
+
+    $('.extra-life img').attr('src', count === 0 ? '/images/heart.png' : '/images/heart_full.png');
+    $('.life-count').text(count);
+  });
+}
+
 
 /* Init */
 $(() => {
   attachQuestionListeners();
+  checkExtraLives();
   if (!window.displayTest) {
     showCountdown();
     checkShows();

@@ -88,7 +88,7 @@ function submitCode() {
     $('.form.enter-code .error').addClass('ghost');
 
     const accessToken = res.auth.accessToken;
-    if ($('input.remember')[0].checked) {
+    if ($('input#remember')[0].checked) {
       saveAccessToken(accessToken);
     }
     showExtraLifeMessage();
