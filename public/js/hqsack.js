@@ -123,7 +123,9 @@ function attachQuestionListeners() {
   });
 
   $('#highlight-box').change(() => {
-    if ($('#highlight-box')[0].checked) {
+    const enabled = $('#highlight-box').prop('checked');
+    Cookies.set('enableHighlight', enabled);
+    if (enabled) {
       questionSearchUrl = proxySearchUrl;
       $('.page.question').addClass('highlighted');
     } else {
@@ -136,6 +138,9 @@ function attachQuestionListeners() {
     }
   });
 
+  let enableHighlight = Cookies.get('enableHighlight');
+  enableHighlight = enableHighlight != null ? enableHighlight === 'true' : true;
+  $('#highlight-box').prop('checked', enableHighlight);
   $('#highlight-box').change();
 }
 
