@@ -135,6 +135,8 @@ function attachQuestionListeners() {
       loadQuestionSearch(lastQuestion);
     }
   });
+
+  $('#highlight-box').change();
 }
 
 function updateQuestion(data) {
