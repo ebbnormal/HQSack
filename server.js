@@ -71,6 +71,7 @@ app.get('/search', (req, res) => {
 
     countHtml += '</div>';
     html = html.replace(/<\/body>/, `${countHtml}$&`);
+    html = html.replace(/<div\s+id="b_content"\sstyle="visibility:\s*hidden">/, '<div id="b_content">');
     
     res.send(html);
   });
