@@ -113,7 +113,7 @@ function attachQuestionListeners() {
   });
 
   $('.question-text').on('contextmenu', '.question-word', e => {
-    const word = e.target.innerText.replace(/(?:^[?.!",'])|(?:[?.!"”,]$)/g, '');
+    const word = e.target.innerText.replace(/(?:^[?.!"“,'])|(?:[?.!"”,]$)/g, '');
     selectAnswerSearchModifier(word, true);
     return false;
   });
